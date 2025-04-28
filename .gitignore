@@ -34,3 +34,16 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# === Editores y entornos de desarrollo ===
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.spyderproject
+.spyproject
+.ropeproject
