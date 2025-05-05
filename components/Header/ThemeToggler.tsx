@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
-const ThemeToggler = () => {
+export function ThemeToggler () {
   const { theme, setTheme } = useTheme();
 
   return (
@@ -27,6 +27,4 @@ const ThemeToggler = () => {
       />
     </button>
   );
-};
-
-export default ThemeToggler;
+}

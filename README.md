@@ -1,91 +1,52 @@
-# Solid - Free Next.js Web Template and Starter Kit for SaaS
 
-Solid is a free Next.js template specifically crafted for startups, SaaS, and software websites. It provides an extensive array of necessary sections, elements, and pages required to build a fully-equipped website for any SaaS, software, or startup site. Comes with all cutting edge React and Next.js features - **Built with Next.js 13, React 18 and TypeScript.**
+## 🗂 Estructura principal:
 
-This Next.js template's homepage comes with an awesome hero area, logos of associated brands, a features section, an about section, another features section with tabs, counters, and star ratings, integration options, clear call-to-actions, an FAQ section with accordions, a testimonials section, pricing tables, a contact page, a blog, and a distinctive footer.
+| Carpeta | ¿Qué contiene? |  
+|:--------|:----------------|
+| `/app` | Aquí están las **páginas y rutas** (`app router`) del sitio. Cada carpeta puede tener un `page.tsx`, `layout.tsx`, y `head.tsx`. |
+| `/components` | **Componentes reutilizables**: botones, cards, secciones como About, Blog, Hero, etc. |
+| `/markdown` | Archivos `.mdx` que probablemente cargues dinámicamente como documentos o posts. |
+| `/public` | Imágenes, íconos y archivos estáticos accesibles directamente desde el navegador. |
+| `/src/app` | Parece que aquí tienes **global styles** (`globals.css`) y **layout base** (`layout.tsx`) para toda la app. |
+| `/types` | **Interfaces y tipos** TypeScript (para datos de blog, FAQ, menús, etc.). |
+| Archivos raíz | Configuración del proyecto (`next.config.js`, `tsconfig.json`, `package.json`, etc.).
 
-**Solid Next.js template packed with all necessary external pages** - such as login, registration, blog grids, and single blog pages, among others. This broad collection of pages provides all the necessary tools to create a feature-packed, comprehensive, and visually appealing website or landing page for software, a web application, or SaaS.
+---
 
-### [🔥 Get Solid Pro - Next.js SaaS Boilerplate and Starter Kit](https://nextjstemplates.com/templates/solid)
+## 🧠 Sobre `/app` (App Router)
 
-### [🚀 Solid PRO Live Demo](https://solid.nextjstemplates.com/)
+Tu ruta principal es `/app/(site)`, que contiene:
 
-### [🚀 Solid FREE Live Demo](https://solid-free.nextjstemplates.com/)
+| Ruta | ¿Qué es? |
+|:-----|:---------|
+| `auth/signin/page.tsx` | Página de **iniciar sesión**. |
+| `auth/signup/page.tsx` | Página de **registrarse**. |
+| `blog/page.tsx` | Página de listado de **blogs**. |
+| `blog/blog-details/page.tsx` | Página de **detalle** de blog. |
+| `docs/page.tsx` | Página de **documentos** (quizá usando los .mdx de `/markdown`). |
+| `support/page.tsx` | Página de **soporte**. |
+| `error/page.tsx` | Página de **error 404** o personalizada. |
+| `layout.tsx` | **Layout general** de las páginas bajo `(site)`. |
+| `head.tsx` | **Metadata** de las páginas: títulos, descripciones, etc. |
+| `page.tsx` | Seguramente el **home** del sitio. |
 
-### Solid PRO vs Solid FREE Comparison 📊
+El patrón `(site)` indica que es un **grupo de rutas**, útil para separar áreas (como una sección "admin" después).
 
-#### [Solid PRO](https://solid.nextjstemplates.com/)
-- SaaS Boilerplate + Starter Kit with Essential Integrations and Functionalities
-- Essential Integrations: Auth, DB, Stripe, MDX and More ...
-- Fully Functional, Ready to Use Sanity Blog Support
-- Premium Email Support
-- Functional External Pages
-- Free Lifetime Future Updates
-___
-#### [Solid FREE](https://solid-free.nextjstemplates.com/)
-- Only UI - Coded for Next.js
-- No Integrations
-- No Functional Blogging System
-- External Pages without Functions/Integrations
-- Community Support
-- Free Lifetime Future Updates
-___
+---
 
-### [📦 Download](https://nextjstemplates.com/templates/solid)
+## ⚙️ Cositas técnicas que veo:
 
-### [🔥 Get Pro](https://nextjstemplates.com/templates/solid)
+- Estás usando **TypeScript** (`.tsx`, `.ts`).
+- Manejas **contextos** (`/app/context/ToastContext.tsx`) → probablemente para mostrar notificaciones tipo "toast".
+- Estás usando **ESLint**, **Prettier** → normas de código automáticas.
+- Usas **TailwindCSS** o algún sistema de estilos compatible (por `postcss.config.js`).
 
-### [🔌 Documentation](https://nextjstemplates.com/docs)
+---
 
-### ⚡ Deploy Now
+## 🛠️ ¿Qué significa trabajar así en Next.js?
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNextJSTemplates%2Fsolid-nextjs)
-
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/NextJSTemplates/solid-nextjs)
-
-
-## Installation
-
-Here are the steps you need to follow to install the dependencies.
-
-1.Download and extract the template from **Next.js Templates.**
-
-2.**cd** into the template directory then run this command to install all the dependencies
-    
-```bash
-    npm install --legacy-peer-deps
-```
-**Note:** As of right now React 19 causes peer dependencies issues with some packages, so the `legacy-peer-deps` flag is required.
-
-You can start the project on the local server
-    
-```bash
-    npm run dev
- ```
-
-It’ll start the template on [localhost:3000](http://localhost:3000). 
-
-The documentation includes all the guides you need for the integrations. 
-
-
-### Deploying on PaaS
-
-If you are using a GitHub repo then you can go with free-of-cost and easy-to-use options like [Vercel](https://vercel.com/), or [Netlify](https://netlify.com/) they offer decent-free tiers for Next.js hosting.
-
-### 📄 License
-Solid Free is 100% free and open-source, feel free to use with your personal and commercial projects.
-
-### 💜 Support
-If you like the template, please star this repository to inspire the team to create more stuff like this and reach more users like you!
-
-### ✨ Browse and Download - Best Free [Next.js Templates](https://nextjstemplates.com/templates)
-
-### Update Log
-
-**10 April 2025**
-- Update eslint to v9.24.0 to resolve peer deps warning during installation.
-- Migrate to tailwind v4
-
-**29 Jan 2025**
-- Upgraded to Next.js 15
-- Update framer-motion to v12.0.6 for React 19 support.
+- Cada `page.tsx` **es una página** en tu sitio web.
+- Cada `layout.tsx` **esqueleto o estructura** de esas páginas (Navbar, Footer, etc.).
+- Puedes **anidar** rutas fácilmente (como `blog/blog-details`).
+- Puedes usar **archivos MDX** para contenido dinámico de documentos o posts (markdown + react).
+- Con **tipado fuerte** en los datos (TypeScript en `/types`).
