@@ -11,7 +11,7 @@ export type User = {
     created_at: string;
 }
 
-export type UserLogin = Pick<User, 'username'> & {
+export type UserLogin = Pick<User, 'email'> & {
     password: string;
 };
 

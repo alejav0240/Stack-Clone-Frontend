@@ -1,31 +1,60 @@
-﻿import axios from "axios";
+﻿// lib/api.ts
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const API = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
-    withCredentials: true, // 👈 Las cookies se enviarán automáticamente
+    withCredentials: true,
 });
 
-// Manejar errores (como 401 y refresh automático)
+// Utilidad para evitar múltiples intentos simultáneos de refresh
+let isRefreshing = false;
+let failedQueue: Array<{
+    resolve: (value?: unknown) => void;
+    reject: (reason?: unknown) => void;
+}> = [];
+
+const processQueue = (error: AxiosError | null, tokenRefreshed: boolean) => {
+    failedQueue.forEach(p => {
+        if (tokenRefreshed) {
+            p.resolve(undefined);
+        } else {
+            p.reject(error);
+        }
+    });
+    failedQueue = [];
+};
+
+// Interceptor de errores para manejo de 401
 API.interceptors.response.use(
     response => response,
-    async error => {
-        const originalRequest = error.config;
+    async (error: AxiosError) => {
+        const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
-            try {
-                // Intentar refrescar el token usando cookies
-                await axios.post("http://localhost:8000/api/auth/jwt/refresh/", {}, { withCredentials: true });
+            if (isRefreshing) {
+                return new Promise((resolve, reject) => {
+                    failedQueue.push({ resolve, reject });
+                }).then(() => API(originalRequest));
+            }
 
-                // Reintentar la solicitud original
+            isRefreshing = true;
+
+            try {
+                await axios.post(
+                    `${process.env.NEXT_PUBLIC_API_URL}/auth/jwt/refresh/`,
+                    {},
+                    { withCredentials: true }
+                );
+
+                processQueue(null, true);
                 return API(originalRequest);
             } catch (refreshError) {
-                console.error("❌ Error al refrescar token", refreshError);
-                // Si falla el refresh, forzar logout
-                if (typeof window !== "undefined") {
-                    window.location.href = "/auth/signin";  // Redirigir al login
-                }
+                processQueue(refreshError as AxiosError, false);
+                console.error("🔒 Token refresh failed", refreshError);
+            } finally {
+                isRefreshing = false;
             }
         }
 
