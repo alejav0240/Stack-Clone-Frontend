@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
-//import {Header} from "@/components/Header/Header";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import Header from "@/components/Header";
 import Lines from "@/components/Lines";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -9,9 +9,9 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "../globals.css";
 const inter = Inter({ subsets: ["latin"] });
-
 import ToasterContext from "../context/ToastContext";
 import QueryProviders from "@/providers/QueryProvider";
+import {AuthProvider} from "@/app/context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -23,18 +23,23 @@ export default function RootLayout({
       <body className={`dark:bg-black ${inter.className}`}>
 
       <QueryProviders>
-          <ThemeProvider
-            enableSystem={false}
-            attribute="class"
-            defaultTheme="light"
-          >
-            <Lines />
-            <Header/>
-            <ToasterContext />
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </ThemeProvider>
+
+          <AuthProvider>
+              <ThemeProvider
+                enableSystem={false}
+                attribute="class"
+                defaultTheme="light"
+              >
+                <Lines />
+                <Header/>
+                <ToasterContext />
+                {children}
+                <Footer />
+                <ScrollToTop />
+              </ThemeProvider>
+
+              <ReactQueryDevtools initialIsOpen={false} />
+          </AuthProvider>
         </QueryProviders>
       </body>
     </html>

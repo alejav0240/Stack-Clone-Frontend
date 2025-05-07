@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const Hero = () => {
+
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {

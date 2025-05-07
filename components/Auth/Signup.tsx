@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSignup } from "@/hooks/useLogin";
+//import { useSignup } from "@/modulos/users/useUser";
 import { toast } from "react-hot-toast";
-import {UserRegister} from "@/types/user";
+import {UserRegister} from "@/modulos/users/userType";
 
 const signupSchema = z
     .object({
@@ -31,7 +31,7 @@ const Signup = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const mutationSignup = useSignup();
+  //const mutationSignup = useSignup();
 
     type SignupFormData = UserRegister & { confirmPassword: string }; // Extiende UserRegister
 
@@ -39,7 +39,7 @@ const Signup = () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { confirmPassword, ...userData } = data; // Excluir confirmPassword
         try {
-            await mutationSignup.mutateAsync({ user: userData });
+            //await mutationSignup.mutateAsync({ user: userData });
             toast.success("Cuenta creada exitosamente");
         } catch {
             toast.error("Error al crear la cuenta");
