@@ -49,7 +49,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/tu-usuario/front-stack-develop.git
+    git clone https://github.com/alejav0240/front-stack-develop.git
     cd front-stack-develop
     ```
 
@@ -192,7 +192,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu máquina local:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/tu-usuario/front-stack-develop.git
+    git clone https://github.com/alejav0240/front-stack-develop.git
     cd front-stack-develop
     ```
 
